@@ -10,7 +10,9 @@ module.exports = function (fastify, opts, next) {
   const routes = []
 
   fastify.addHook('onRoute', (routeOptions) => {
-    routes.push(routeOptions)
+    if (routeOptions.prefix.startsWith(fastify.prefix)) {
+      routes.push(routeOptions)
+    }
   })
 
   opts = opts || {}
