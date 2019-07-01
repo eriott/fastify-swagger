@@ -3,15 +3,13 @@ const fse = require('fs-extra')
 const swaggerUiAssetPath = require('swagger-ui-dist').getAbsoluteFSPath()
 const resolve = require('path').resolve
 
-const writeStream = fs.createWriteStream('prepare.log')
-
-writeStream.write('Start prepare-swagger-ui.js\n')
+console.log('Start prepare-swagger-ui.js')
 
 let staticDir = resolve('./static')
-writeStream.write(`Create /static directory by path ${staticDir}\n`)
+console.log(`Create /static directory by path ${staticDir}`)
 fse.emptyDirSync(staticDir)
 
-writeStream.write(`Copy assets from dir ${swaggerUiAssetPath}...\n`)
+console.log(`Copy assets from dir ${swaggerUiAssetPath}...`)
 
 // since the original swagger-ui-dist folder contains non UI files
 const filesToCopy = ['favicon-16x16.png',
@@ -30,7 +28,7 @@ filesToCopy.forEach(filename => {
   fse.copySync(`${swaggerUiAssetPath}/${filename}`, resolve(`./static/${filename}`))
 })
 
-writeStream.write(`All assets copied.\n`)
+console.log(`All assets copied.`)
 
 const newIndex = fs.readFileSync(resolve('./static/index.html'), 'utf8')
   .replace('window.ui = ui', `window.ui = ui
@@ -48,5 +46,4 @@ const newIndex = fs.readFileSync(resolve('./static/index.html'), 'utf8')
 
 fse.writeFileSync(resolve('./static/index.html'), newIndex)
 
-writeStream.write('Finished prepare-swagger-ui.js\n')
-writeStream.end()
+console.log('Finished prepare-swagger-ui.js\n')
