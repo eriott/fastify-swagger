@@ -4,7 +4,7 @@
   "description": "Generate Swagger files automatically for Fastify.",
   "main": "index.js",
   "scripts": {
-    "preinstall": "node prepare-swagger-ui",
+    "postinstall": "node prepare-swagger-ui",
     "test": "standard && tap test/*.js && npm run typescript",
     "prepublishOnly": "npm run prepare",
     "typescript": "tsc --project ./tsconfig.json"
