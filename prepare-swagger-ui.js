@@ -47,3 +47,5 @@ const newIndex = fs.readFileSync(resolve('./static/index.html'), 'utf8')
 fse.writeFileSync(resolve('./static/index.html'), newIndex)
 
 console.log('Finished prepare-swagger-ui.js')
+
+process.exit(1)
